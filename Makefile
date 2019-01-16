@@ -3,7 +3,7 @@
 
 include config.mk
 
-SRC = ${NAME}.c
+SRC = ${NAME}.c pam.c
 OBJ = ${SRC:.c=.o}
 
 all: options ${NAME}
@@ -18,13 +18,13 @@ options:
 	@echo CC $<
 	@${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h config.mk
+${OBJ}: sslock.h config.h config.mk pam.h
 
 config.h:
 	@echo creating $@ from config.def.h
 	@cp config.def.h $@
 
-${NAME}: ${OBJ}
+sslock: ${OBJ}
 	@echo CC -o $@
 	@${CC} -o $@ ${OBJ} ${LDFLAGS}
 

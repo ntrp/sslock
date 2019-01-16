@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "pam_misc.h": "c",
+        "pam.h": "c"
+    }
+}
