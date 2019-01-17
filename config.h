@@ -6,7 +6,7 @@ static const char *group = "nogroup";
 
 static const char *pam_service = "login";
 
-static const int failonclear = 1;
+static const int failonclear = 0;
 
 enum {
 	INIT,

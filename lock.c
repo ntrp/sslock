@@ -128,9 +128,6 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 			case XK_Return:
 				passwd[len] = '\0';
 				errno = 0;
-				fprintf(stderr, "debug: %s\n", pam_service);
-				fprintf(stderr, "debug: %s\n", hash);
-				fprintf(stderr, "debug: %s\n", passwd);
 				retval = pam_start(pam_service, hash, &pamc, &pamh);
 				color = PAM;
 				for (screen = 0; screen < nscreens; screen++) {

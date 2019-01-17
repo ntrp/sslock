@@ -13,11 +13,6 @@
 #include "pam.h"
 #include "lock.h"
 
-static struct pam_conv conv = {
-    sslock_pam_conv,
-    NULL
-};
-
 int main(int argc, char *argv[]) {
 
     struct xrandr rr;
@@ -42,20 +37,20 @@ int main(int argc, char *argv[]) {
 	dgid = grp->gr_gid;
 
 #ifdef __linux__
-	//dontkillme();
+	dontkillme();
 #endif
         
     if (!(dpy = XOpenDisplay(NULL)))
 		die("slock: cannot open display\n");
 
 	/* drop privileges 
+	*/
 	if (setgroups(0, NULL) < 0)
 		die("slock: setgroups: %s\n", strerror(errno));
 	if (setgid(dgid) < 0)
 		die("slock: setgid: %s\n", strerror(errno));
 	if (setuid(duid) < 0)
 		die("slock: setuid: %s\n", strerror(errno));
-	*/
 
 	/* check for Xrandr support */
 	rr.active = XRRQueryExtension(dpy, &rr.evbase, &rr.errbase);
@@ -92,31 +87,5 @@ int main(int argc, char *argv[]) {
 
 	readpw(dpy, &rr, locks, nscreens, "ntrp");
 
-    /*
-    const char *user="user";
-    strcpy(passwd, "pwd");
-
-    retval = pam_start("login", user, &conv, &pamh);
-
-    if (retval == PAM_SUCCESS)
-        retval = pam_authenticate(pamh, 0); 
-
-    if (retval == PAM_SUCCESS)
-        retval = pam_acct_mgmt(pamh, 0); 
-
-    if (retval == PAM_SUCCESS) {
-        fprintf(stdout, "Authenticated\n");
-    } else {
-        fprintf(stdout, "Not Authenticated\n");
-    }
-
-    if (pam_end(pamh,retval) != PAM_SUCCESS) {
-        pamh = NULL;
-        fprintf(stderr, "check_user: failed to release authenticator\n");
-        exit(1);
-    }
-
-    return ( retval == PAM_SUCCESS ? 0:1 );
-    */
     return 0;
 }
