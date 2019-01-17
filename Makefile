@@ -3,7 +3,7 @@
 
 include config.mk
 
-SRC = ${NAME}.c pam.c
+SRC = $(wildcard *.c)
 OBJ = ${SRC:.c=.o}
 
 all: options ${NAME}
@@ -17,8 +17,6 @@ options:
 .c.o:
 	@echo CC $<
 	@${CC} -c ${CFLAGS} $<
-
-${OBJ}: sslock.h config.h config.mk pam.h
 
 config.h:
 	@echo creating $@ from config.def.h

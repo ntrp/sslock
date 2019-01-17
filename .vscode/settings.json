@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "pam_misc.h": "c",
-        "pam.h": "c"
+        "pam.h": "c",
+        "sslock.h": "c",
+        "utils.h": "c",
+        "fcntl.h": "c",
+        "oom.h": "c",
+        "xlib.h": "c",
+        "config.h": "c"
     }
 }
